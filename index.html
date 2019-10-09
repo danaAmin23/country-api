@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <style>
+        html {
+            font-family: 'Nunito Sans', sans-serif;
+            display: flex;
+
+
+        }
+
+        .header {
+            height: 10vh;
+            background-color: white;
+            overflow: hidden;
+
+        }
+
+        .header h1 {
+            float: left;
+            font-weight: bold;
+            margin-left: 5pc;
+            margin-right: 54pc;
+            font-size: 28px;
+            color: rgb(39, 48, 53);
+
+
+        }
+
+
+        .header input {
+            background-color: transparent;
+            border: 0;
+            font-size: 14px;
+            color: hsl(200, 15%, 8%);
+
+
+        }
+
+
+        body {
+            margin: 0;
+            background-color: hsl(0, 0%, 98%);
+        }
+
+        .dark {
+            background-color: white;
+        }
+
+        .header img {
+            height: 18px;
+            vertical-align: text-bottom;
+        }
+
+
+        .dark-light-mode {
+            margin-top: 22px;
+            float: right;
+            margin-right: 5pc;
+        }
+
+        .search-country {
+            width: 35pc;
+            margin: 5pc 5pc 5pc 107px;
+            height: 2pc;
+            border: none;
+
+        }
+
+        .btnSearch {
+            background-image: url("images/search.svg");
+            background-repeat: no-repeat;
+            background-color: white;
+            position: absolute;
+
+            border: 0;
+            width: 28px;
+            margin-top: 80px;
+            margin-left: 5pc;
+            height: 29px;
+            padding-top: 33px;
+
+        }
+
+        .btnSubmit {
+            border: 0;
+            background-color: white;
+            margin: 5pc 0 5pc 5pc;
+        }
+
+        .txtSearch {
+            vertical-align: text-bottom;
+            width: 25pc;
+            height: 3pc;
+            border: 0;
+        }
+
+
+
+        .searchContainer {
+            display: inline-flex;
+            flex: 1 1 300px;
+
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 5pc;
+        }
+
+        .searchIcon {
+            padding: 14px;
+            background-color: white;
+
+        }
+
+        .searchBox {
+            padding: 14px;
+            border: none;
+            width: 32pc;
+            background: hsl(0, 0%, 100%);
+            padding-left: 4pc;
+        }
+
+        body select {
+            height: 3pc;
+            border: none;
+            margin-left: 22pc;
+            width: 16pc;
+            color: hsl(0, 0%, 52%);
+            background: hsl(0, 0%, 100%);
+            padding-left: 4pc;
+        }
+
+        body select>option {
+            background: white;
+            border-radius: 1pc 1pc 1pc 1pc;
+            border: none;
+            margin-top: 5pc;
+        }
+
+
+
+        .countries {
+            height: 100pc;
+            width: 80pc;
+            border: 1px solid;
+            margin: 5pc;
+        }
+
+       
+
+      
+        .country {
+            width: 15pc;
+            margin-left: 5pc;
+            background: white;
+            float: left;
+            margin-right: 26px;
+            border-radius: 20px;
+
+        }
+
+        .country img {
+            height: 10pc;
+            width: 15pc;
+            border-radius: 1pc 1pc 0 0;
+
+        }
+
+
+        .country h4 {
+            margin: 0;
+            float:left;
+            margin-right:7px;
+
+        }
+
+        .ctrDesc {
+            padding: 1pc 1pc 2pc 2pc;
+        }
+
+        ul {
+            padding-left: 0;
+        }
+
+
+        ul li {
+            list-style: none;
+            display: inline-flex;
+            margin-bottom: 3pc;
+        }
+
+
+
+        .details img {
+            margin-left: 5pc;
+            width: 700px;
+            height: 365px;
+        }
+
+        .details h2 {
+            float: right;
+            margin-right: 25pc;
+            font-size: 44px;
+
+        }
+
+        .btnSearch {
+            width: 3pc;
+            background: white;
+            border: none;
+            margin: 0%;
+            height: 44px;
+            background-image: url("images/search.svg");
+            background-repeat: no-repeat;
+            background-size: 24px;
+            background-position: center;
+        }
+
+
+        .country-details{
+            margin-left: 7pc;
+            width:20pc;
+        }
+
+        .country-details h4{
+            margin-right:1pc;
+        }
+
+        .btnBack{
+            FONT-SIZE: 20PX;
+    text-align: center;
+    height: 3pc;
+    border-radius: 10px 10px 0px 0px;
+    margin:0 0 5pc 5pc;
+    font-family:'Nunito Sans, sans-serif';
+        }
+
+    </style>
+</head>
+
+
+
+<script>
+
+
+    $(document).ready(function () {
+
+
+        $('.searchBox').keypress(function(e){
+      if(e.keyCode==13){
+          search();
+      }
+    
+
+
+    });//end keypress
+
+
+
+
+        //dark mode button event handler 
+        $(".btnDark").click(function () {
+
+
+            if ($(".header h1").css('color') == 'rgb(39, 48, 53)') {
+                //header dark mode
+                $(".header").css("background-color", "hsl(209, 23%, 22%)");
+                $(".header").css("color", "white");
+                $(".btnDark").css("color", "white");
+                $(".header h1").css("color", "white");
+                $(".country").css("background-color", "hsl(209, 23%, 22%)");
+                $(".country").css("color", "hsl(0, 0%, 100%)");
+                $(".searchBox").css("background-color", "hsl(209, 23%, 22%)");
+                $("body select").css("background-color", "hsl(209, 23%, 22%)");
+                $(".searchIcon").css("background-color", "hsl(209, 23%, 22%)");
+                $(".header img").attr("src", "images/moon2.svg");
+                $(".btnSearch").css("background-color", "rgb(43, 57, 69)");
+                $(".btnSearch").css("background-image", "url(images/search2.svg)");
+                $(".searchBox").css("color", "white");
+                $(".details h2").css("color","white");
+                $(".details h4").css("color","white");
+                $(".native-name,.population,.region,.sub-region,.capital").css("color", "white");
+                //body dark mode
+                $("body").css("background-color", "hsl(207, 26%, 17%)");
+            }//end if light mode
+
+
+
+            else {
+                $(".header img").attr("src", "images/moonlight.svg");
+                $(".btnSearch").css("background-color", "white");
+                $(".btnSearch").css("background-image", "url(images/search.svg)");
+                $(".header").css("background-color", "white");
+                $(".header h1").css("color", "rgb(39, 48, 53)");
+                $(".btnDark").css("color", "rgb(39, 48, 53)");
+                //body dark mode
+                $("body").css("background-color", "hsl(0,0%,98%)");
+                $(".country").css("background-color", "white");
+                $(".country").css("color", "hsl(200, 15%, 8%)");
+                $(".searchBox").css("background-color", "hsl(0, 0%, 100%)");
+                $(".searchBox").css("color", "white");
+                $("body select").css("background-color", "hsl(0, 0%, 100%)");
+                $(".searchIcon").css("background-color", "hsl(0, 0%, 100%)");
+                $(".searchBox").css("color", "black");
+                $(".details h2").css("color","black");
+                $(".details h4").css("color","black");
+                $(".native-name,.population,.region,.sub-region,.capital").css("color", "black");
+
+
+
+                
+
+           }//end if light mode
+        });//end btnDark
+
+
+
+        $.ajax({
+            url: "https://restcountries.eu/rest/v2/all"
+        }).then(function (data) {
+            console.log(data);
+
+            for (var i = 0; i <= data.length - 1; i++) {
+
+                $("ul").append('<li> <div class="country" id=' + 'country' + i + '><img><div class="ctrDesc"> <h2></h2> <h4>Population : </h4> <div class="population"></div><br> <h4>Region : </h4><div class="region"></div><br><h4 style="float:left;"> Capital : </h4><div class="capital"></div></div></div></li>');
+            }
+
+            //now do dynamic population via loop
+            console.log(data.length - 1);
+
+            for (let index = 0; index <= data.length - 1; index++) {
+
+                //retrieve div class
+                //img
+                var classCtr = "#country" + index;
+
+                var class_img_src = classCtr + " " + "img";
+                var class_h2 = classCtr + " " + "h2";
+                var class_population = classCtr + " " + ".population";
+                var class_region = classCtr + " " + ".region";
+                var class_capital = classCtr + " " + ".capital";
+
+                $(class_img_src).attr("src", data[index].flag);
+                $(class_h2).append(data[index].name);
+                $(class_population).append(data[index].population);
+                $(class_region).append(data[index].region);
+                $(class_capital).append(data[index].capital);
+
+
+
+
+            }
+            //pathc up flag images  via mapsopen source
+            $('#country13 img').attr("src", "http://www.mapsopensource.com/images/flag-of-australia.gif");
+            $('#country17 img').attr("src", "http://www.mapsopensource.com/images/flag-of-bahrain.gif");
+            $('#country18 img').attr("src", "http://www.mapsopensource.com/images/flag-of-bangladesh.gif");
+            $('#country20 img').attr("src", "http://www.mapsopensource.com/images/flag-of-belarus.gif");
+            $('#country28 img').attr("src", "http://www.mapsopensource.com/images/flag-of-bosnia-and-herzegovina.gif");
+            $('#country37 img').attr("src", "http://www.mapsopensource.com/images/flag-of-bulgaria.gif");
+            $('#country74 img').attr("src", "http://www.mapsopensource.com/images/flag-of-faroe-islands.gif");
+            $('#country86 img').attr("src", "http://www.mapsopensource.com/images/flag-of-gibraltar.gif");
+            $('#country84 img').attr("src", "http://www.mapsopensource.com/images/flag-of-germany.gif");
+            $('#country89 img').attr("src", "http://www.mapsopensource.com/images/flag-of-grenada.gif");
+            $('#country102 img').attr("src", "http://www.mapsopensource.com/images/flag-of-hungary.gif");
+            $('#country95 img').attr("src", "http://www.mapsopensource.com/images/flag-of-guinea-bissau.gif");
+            $('#country100 img').attr("src", "http://www.mapsopensource.com/images/flag-of-honduras.gif");
+            $('#country111 img').attr("src", "http://www.mapsopensource.com/images/flag-of-israel.gif");
+            $('#country113 img').attr("src", "http://www.mapsopensource.com/images/flag-of-jamaica.gif");
+            $('#country115 img').attr("src", "http://www.mapsopensource.com/images/flag-of-jersey.gif");
+            $('#country126 img').attr("src", "http://www.mapsopensource.com/images/flag-of-liberia.gif");
+            $('#country218 img').attr("src", "http://www.mapsopensource.com/images/flag-of-sweden.gif");
+            $('#country219 img').attr("src", "http://www.mapsopensource.com/images/flag-of-switzerland.gif");
+            $('#country222 img').attr("src", "http://www.mapsopensource.com/images/flag-of-tajikistan.gif");
+            $('#country214 img').attr("src", "http://www.mapsopensource.com/images/flag-of-sudan.gif");
+            $('#country205 img').attr("src", "http://www.mapsopensource.com/images/flag-of-slovenia.gif");
+            $('#country211 img').attr("src", "http://www.mapsopensource.com/images/flag-of-south-sudan.gif");
+            $('#country117 img').attr("src", "http://www.mapsopensource.com/images/flag-of-kazakhstan.gif");
+            $('#country120 img').attr("src", "http://www.mapsopensource.com/images/flag-of-kuwait.gif");
+            $('#country128 img').attr("src", "http://www.mapsopensource.com/images/flag-of-liberia.gif");
+            $('#country129 img').attr("src", "http://www.mapsopensource.com/images/flag-of-lithuania.gif");
+            $('#country162 img').attr("src", "http://www.mapsopensource.com/images/flag-of-nigeria.gif");
+            $('#country144 img').attr("src", "http://www.mapsopensource.com/images/flag-of-mexico.gif");
+            $('#country168 img').attr("src", "http://www.mapsopensource.com/images/flag-of-oman.gif");
+            $('#country31 img').attr("src", "http://www.mapsopensource.com/images/flag-of-brazil.gif");
+            $('#country56 img').attr("src", "http://www.mapsopensource.com/images/flag-of-costa-rica.gif");
+            $('#country132 img').attr("src", "http://www.mapsopensource.com/images/flag-of-macedonia.gif");
+            $('#country229 img').attr("src", "http://www.mapsopensource.com/images/flag-of-trinidad-and-tobago.gif");
+            $('#country238 img').attr("src", "http://www.mapsopensource.com/images/flag-of-united-kingdom.gif");
+            $('#country249 img').attr("src", "http://www.mapsopensource.com/images/flag-of-zimbabwe.gif");
+
+
+
+        });//end ajax
+
+
+
+    });//end document ready
+
+
+
+    function search() {
+
+        var x = document.getElementById("txtSrch").value;
+        //var y = $(".txtSrch").val; ???
+        var webUrl = "https://restcountries.eu/rest/v2/name/" + x;
+        console.log(webUrl);
+
+
+        $.ajax({
+            url: webUrl
+        }).then(function (data) {
+            $('.container').html("<div class='details-back'><input type=''button' value='Back' onclick='btnBack()' class='btnBack'></div><div class='details'><img style = 'float:left;'><h2></h2><div class = 'country-details' style ='float:left;'><h4 style='float:left;'>Native Name : </h4> <div class='native-name'></div><h4 style ='float:left;'>Population : </h4> <div class='population'></div><h4 style='float:left;'>Region : </h4> <div class='region'></div><h4 style='float:left;'>Sub-Region : </h4> <div class='sub-region'></div><h4 style = 'float:left;'>Capital : </h4> <div class='capital'></div></div></div>");
+            $('.container img').attr("src", data[0].flag);
+            $('.container h2').html(data[0].name);
+            $('.native-name').append(data[0].nativeName);
+            $('.population').append(data[0].population);
+            $('.region').append(data[0].region);
+            $('.sub-region').append(data[0].subregion);
+            $('.capital').append(data[0].capital);
+            $(".country-details h4").css("margin", 0);
+            $(".country-details h4").css("margin-right", "10px");
+            $(".native-name,.population,.region,.sub-region,.capital").css("margin-bottom", "1pc");
+            $("select").css("visibility", "hidden");
+            $(".searchContainer").css("visibility", "hidden");
+            $(".searchContainer").css("margin", 0);
+
+
+        });
+
+
+    }//end validateForm()
+
+   
+
+
+
+
+
+
+    function btnBack(){
+        location.reload();
+
+    }
+
+
+
+</script>
+
+
+
+<div class="header">
+
+    <h1>Where in the world?</h1>
+    <div class="dark-light-mode">
+        <img src="images/moonlight.svg"> <input type="button" class="btnDark" value="Dark Mode">
+    </div>
+</div>
+
+
+<body>
+
+
+  
+      
+
+    <div class="searchContainer">
+
+        <input type="button" class="btnSearch"  onclick="search()">
+
+            <input class="searchBox" id="txtSrch" type="text" name="search" placeholder="Search for a country...">
+            
+    </div>
+
+
+    <select>
+        <option>Filter By Region </option>
+        <option value="1">Africa</option>
+        <option value="2">Antarctica</option>
+        <option value="3">Asia</option>
+        <option value="4">Europe</option>
+        <option value="5">Oceania</option>
+
+    </select>
+
+
+    <div class="container">
+
+
+        <ul></ul>
+    </div>
+
+
+</body>
+
+</html>
